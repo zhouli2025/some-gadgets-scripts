@@ -1,0 +1,28 @@
+function txt_cell = read_txt_to_cell(input_txt_path)
+
+fid = fopen(input_txt_path,'r');
+
+txt_cell = {};
+
+num = 1;
+
+while ~feof(fid)
+   
+    tline = fgetl(fid);
+    tline2 = regexp(tline,',','split');
+    
+    [size_row,size_col] = size(tline2);
+    
+    if (size_col == 1) %% if it faied to split
+        
+        tline2 = regexp(tline,' ','split');  %% change the separator        
+    end
+
+    
+    txt_cell(num,:) = tline2;
+    num = num + 1;
+    
+end
+
+fclose(fid);
+
